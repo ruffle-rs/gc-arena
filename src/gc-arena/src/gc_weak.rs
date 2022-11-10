@@ -1,6 +1,5 @@
 use crate::collect::Collect;
 use crate::gc::Gc;
-use crate::types::GcColor;
 use crate::{CollectionContext, MutationContext};
 
 use core::fmt::{self, Debug};

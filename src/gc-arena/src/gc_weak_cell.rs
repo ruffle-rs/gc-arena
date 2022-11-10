@@ -1,4 +1,3 @@
-use crate::types::GcColor;
 use crate::GcCell;
 use crate::{collect::Collect, MutationContext};
 

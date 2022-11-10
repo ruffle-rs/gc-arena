@@ -92,7 +92,7 @@ impl Drop for Context {
                         while let Some(ptr) = drop_resume.0.take() {
                             let gc_box = ptr.as_ref();
                             drop_resume.0 = gc_box.next.get();
-                            Box::from_raw(ptr.as_ptr());
+                            drop(Box::from_raw(ptr.as_ptr()));
                         }
                     }
                 }
@@ -254,7 +254,7 @@ impl Context {
                             if sweep.flags.alive() {
                                 // If the alive flag is set, that means we havn't dropped the inner value of this object,
                                 // so it is safe to drop normally.
-                                Box::from_raw(sweep_ptr.as_ptr());
+                                drop(Box::from_raw(sweep_ptr.as_ptr()));
                             } else {
                                 // If the alive flag is not set, then that means we have already dropped the inner value,
                                 // so we only need to free the GcBox.
